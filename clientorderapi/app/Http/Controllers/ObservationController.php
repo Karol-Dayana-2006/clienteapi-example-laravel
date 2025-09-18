@@ -42,7 +42,7 @@ class ObservationController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/observation', [
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -52,14 +52,16 @@ class ObservationController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('observation.create')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -74,15 +76,15 @@ class ObservationController extends Controller
             $observation = $response->json();
             return view('observation.edit', compact('observation'));
         }
-         elseif($response->status() == Response::HTTP_BAD_REQUEST)
+        elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('observation.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -93,7 +95,7 @@ class ObservationController extends Controller
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->put($url . '/observation/' . $id, [
             'id' => $request->id,
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -103,13 +105,13 @@ class ObservationController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('observation.edit')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -127,12 +129,12 @@ class ObservationController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('observation.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 }

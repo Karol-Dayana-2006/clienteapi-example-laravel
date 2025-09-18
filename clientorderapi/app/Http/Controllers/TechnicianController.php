@@ -32,7 +32,7 @@ class TechnicianController extends Controller
      */
     public function create()
     {
-         return view('technician.create');
+        return view('technician.create');
     }
 
     /**
@@ -44,8 +44,8 @@ class TechnicianController extends Controller
         $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/technician', [
             'document' => $request->document,
             'name' => $request->name,
-            'speciality' =>$request->speciality,
-            'phone' =>$request->phone
+            'speciality' => $request->speciality,
+            'phone' => $request->phone
         ]);
 
         if($response->successful())
@@ -55,15 +55,16 @@ class TechnicianController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
-            return redirect()->route('tecnician.create')->withInput()->withErrors($errors);
+            $errors = $response->json()['errors'];
+            return redirect()->route('technician.create')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -77,15 +78,15 @@ class TechnicianController extends Controller
             $technician = $response->json();
             return view('technician.edit', compact('technician'));
         }
-         elseif($response->status() == Response::HTTP_BAD_REQUEST)
+        elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('technician.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -95,10 +96,11 @@ class TechnicianController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->put($url . '/technician/' . $id, [
+            'id' => $request->id,
             'document' => $request->document,
             'name' => $request->name,
-            'speciality' =>$request->speciality,
-            'phone' =>$request->phone
+            'speciality' => $request->speciality,
+            'phone' => $request->phone
         ]);
 
         if($response->successful())
@@ -108,13 +110,13 @@ class TechnicianController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('technician.edit')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        } 
     }
 
     /**
@@ -132,12 +134,12 @@ class TechnicianController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('technician.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }  
     }
 }

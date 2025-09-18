@@ -42,7 +42,7 @@ class CausalController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/causal', [
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -52,15 +52,15 @@ class CausalController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('causal.create')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }        
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -74,15 +74,15 @@ class CausalController extends Controller
             $causal = $response->json();
             return view('causal.edit', compact('causal'));
         }
-         elseif($response->status() == Response::HTTP_BAD_REQUEST)
+        elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('causal.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -93,7 +93,7 @@ class CausalController extends Controller
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->put($url . '/causal/' . $id, [
             'id' => $request->id,
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -103,13 +103,13 @@ class CausalController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('causal.edit')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -117,7 +117,7 @@ class CausalController extends Controller
      */
     public function destroy(string $id)
     {
-         $url = env('URL_BASE_API', "http://localhost:8000");
+        $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->delete($url . '/causal/' . $id);
 
         if($response->successful())
@@ -127,12 +127,12 @@ class CausalController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('causal.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 }

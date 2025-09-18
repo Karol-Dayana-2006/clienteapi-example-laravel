@@ -45,6 +45,7 @@ class ActivityController extends Controller
         {
             abort($responseTechnicians->status());
         }
+
     }
 
     /**
@@ -59,9 +60,10 @@ class ActivityController extends Controller
             'technician_id' => $request->technician_id,
             'type_activity_id' => $request->type_activity_id
         ]);
+
         if($response->successful())
         {
-            session()->flash('message','Registro creado exitosamente');
+            session()->flash('message', 'Registro creado exitosamente');
             return redirect()->route('activity.index');
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
@@ -72,9 +74,10 @@ class ActivityController extends Controller
         else
         {
             abort($response->status());
-        }
+        }  
     }
 
+   
     /**
      * Show the form for editing the specified resource.
      */
@@ -82,18 +85,21 @@ class ActivityController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/activity/' . $id);
-        
+
         if($response->successful())
         {
             $responseTechnicians = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/technician');
             $responseTypes = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/type_activity');
             if($responseTechnicians->successful() and $responseTypes->successful())
             {
+                $technicians = $responseTechnicians->json();
+                $types = $responseTypes->json();
                 $activity = $response->json();
-                $technicians = $response->json();
-                $types = $response->json();
                 return view('activity.edit', compact('activity', 'technicians', 'types'));
-
+            }
+            else
+            {
+                abort($responseTechnicians->status());
             }
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
@@ -104,7 +110,7 @@ class ActivityController extends Controller
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -120,9 +126,10 @@ class ActivityController extends Controller
             'technician_id' => $request->technician_id,
             'type_activity_id' => $request->type_activity_id
         ]);
+
         if($response->successful())
         {
-            session()->flash('message','Registro actualizado exitosamente');
+            session()->flash('message', 'Registro actualizado exitosamente');
             return redirect()->route('activity.index');
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
@@ -133,7 +140,7 @@ class ActivityController extends Controller
         else
         {
             abort($response->status());
-        }
+        }  
     }
 
     /**
@@ -143,9 +150,10 @@ class ActivityController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->delete($url . '/activity/' . $id);
+
         if($response->successful())
         {
-            session()->flash('message','Registro eliminado exitosamente');
+            session()->flash('message', 'Registro eliminado exitosamente');
             return redirect()->route('activity.index');
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
@@ -156,6 +164,6 @@ class ActivityController extends Controller
         else
         {
             abort($response->status());
-        }
+        }  
     }
 }

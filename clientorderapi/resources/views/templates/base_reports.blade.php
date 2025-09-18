@@ -10,7 +10,7 @@
             <tr>
                 <th>
                     <div style="text-align: center">
-                        <img src="{{ public_path('img/logo.jpg') }}" alt="logo">
+                        <img src="{{ asset('img/logo.jpg') }}" alt="logo">
                     </div>
                 </th>
                 <th>

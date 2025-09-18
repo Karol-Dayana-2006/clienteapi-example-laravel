@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index']);
 
-Route::get('/index', function() {
+Route::get('/index', function () {
     return view('index');
 })->name('index');
 

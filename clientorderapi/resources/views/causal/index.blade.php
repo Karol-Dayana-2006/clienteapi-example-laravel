@@ -1,11 +1,11 @@
 @extends('templates.base')
-@section('title', 'Actividades')
-@section('header', 'Actividades')
+@section('title', 'Causales')
+@section('header', 'Causales')
 @section('content')    
 
     <div class="row">
         <div class="col-lg-12 mb-4 d-grid gap-2 d-md-block">
-            <a href="{{ route('activity.create') }}" class="btn btn-primary">Crear</a>
+            <a href="{{ route('causal.create') }}" class="btn btn-primary">Crear</a>
         </div>
     </div>
 
@@ -18,32 +18,25 @@
                     <tr>
                         <th>Id</th>
                         <th>Descripción</th>
-                        <th>Horas</th>
-                        <th>Técnico</th>
-                        <th>Tipo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($activities as $activity)
+                    @foreach ($causals as $causal) 
                         <tr>
-                            <td>{{ $activity['id'] }}</td>
-                            <td>{{ $activity['description'] }}</td>
-                            <td>{{ $activity['hours'] }}</td>
-                            <td>{{ $activity['technician']['document'] }} - {{ $activity['technician']['name'] }}</td>
-                            <td>{{ $activity["type_activity"]['description'] }}</td>
+                            <td>{{ $causal["id"] }}</td>
+                            <td>{{ $causal["description"] }}</td>
                             <td>
-                                <a href="{{ route('activity.edit', $activity['id']) }}" class="btn btn-primary btn-circle btn-sm" title="Editar">
+                                <a href="{{ route('causal.edit', $causal["id"]) }}" class="btn btn-primary btn-circle btn-sm" title="Editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a href="{{ route('activity.destroy', $activity['id']) }}" class="btn btn-danger btn-circle btn-sm" title="Eliminar" 
+                                <a href="{{ route('causal.destroy', $causal["id"]) }}" class="btn btn-danger btn-circle btn-sm" title="Eliminar" 
                                     onclick="return remove();">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
-                    
                 </tbody>
             </table>
         </div>

@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </li> 
-                
+               
             
                 
                     <li class="nav-item">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </li>
-                
+               
 
             <!-- Divider -->
             <hr class="sidebar-divider"/>
@@ -83,7 +83,7 @@
                 Actividades
             </div>  
 
-            
+           
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
                     aria-expanded="true" aria-controls="collapse4">
@@ -98,8 +98,6 @@
                     </div>
                 </li>
             
-           
-            
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
                     aria-expanded="true" aria-controls="collapse5">
@@ -113,7 +111,7 @@
                         </div>
                     </div>
                 </li>
-               
+           
 
             <!-- Divider -->
             <hr class="sidebar-divider"/>
@@ -137,9 +135,7 @@
                             </div>
                         </div>
                     </li>
-                
-
-                
+               
                     <div class="sidebar-heading">
                         Reportes
                     </div>
@@ -169,7 +165,7 @@
                             </div>
                         </div>
                     </li>
-                 
+               
 
 
             <!-- Divider -->

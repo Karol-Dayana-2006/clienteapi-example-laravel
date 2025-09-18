@@ -18,8 +18,8 @@ class TypeActivityController extends Controller
         $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/type_activity');
         if($response->successful())
         {
-            $Types = $response->json();
-            return view('type_activity.index', compact('Types'));
+            $types = $response->json();
+            return view('type_activity.index', compact('types'));
         }
         else
         {
@@ -42,7 +42,7 @@ class TypeActivityController extends Controller
     {
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->post($url . '/type_activity', [
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -52,37 +52,39 @@ class TypeActivityController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('type_activity.create')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-         $url = env('URL_BASE_API', "http://localhost:8000");
+        $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->get($url . '/type_activity/' . $id);
 
         if($response->successful())
         {
-            $type_activity = $response->json();
-            return view('type_activity.edit', compact('type_activity'));
+            $type = $response->json();
+            return view('type_activity.edit', compact('type'));
         }
-         elseif($response->status() == Response::HTTP_BAD_REQUEST)
+        elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('type_activity.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -93,7 +95,7 @@ class TypeActivityController extends Controller
         $url = env('URL_BASE_API', "http://localhost:8000");
         $response = Http::acceptJson()->withToken(Session::get('token'))->put($url . '/type_activity/' . $id, [
             'id' => $request->id,
-            'descripcion' => $request->description
+            'description' => $request->description
         ]);
 
         if($response->successful())
@@ -103,13 +105,13 @@ class TypeActivityController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('type_activity.edit')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }   
     }
 
     /**
@@ -127,12 +129,12 @@ class TypeActivityController extends Controller
         }
         elseif($response->status() == Response::HTTP_BAD_REQUEST)
         {
-            $errors = $response->json() ['errors'];
+            $errors = $response->json()['errors'];
             return redirect()->route('type_activity.index')->withInput()->withErrors($errors);
         }
         else
         {
             abort($response->status());
-        }
+        }  
     }
 }
