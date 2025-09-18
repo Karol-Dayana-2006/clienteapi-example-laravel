@@ -49,7 +49,6 @@ Route::prefix('causal')->group(function(){
     Route::get('/destroy/{id}', [CausalController::class, 'destroy'])->name('causal.destroy');
 });
 
-
 Route::prefix('observation')->group(function(){
     Route::get('/index', [ObservationController::class, 'index'])->name('observation.index');
     Route::get('/create', [ObservationController::class, 'create'])->name('observation.create');
